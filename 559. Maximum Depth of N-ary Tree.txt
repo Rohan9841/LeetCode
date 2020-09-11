@@ -1,0 +1,44 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+    
+    int count; 
+    int max;
+    
+    public int maxDepth(Node root) {
+        traverse(root);
+        return max;
+    }
+    
+    void traverse(Node root){
+         if(root == null){
+            if(count>max) max = count;
+            return;
+        }
+       count++;
+        if(root.children.isEmpty()) traverse(null);
+        root.children.forEach(
+            child->{
+                traverse(child);
+            }
+        );
+        count--;
+    }
+}
