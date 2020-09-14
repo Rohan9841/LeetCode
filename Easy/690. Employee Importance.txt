@@ -1,0 +1,65 @@
+/*
+// Definition for Employee.
+class Employee {
+    public int id;
+    public int importance;
+    public List<Integer> subordinates;
+};
+
+[[13,3,[1,4]],[2,3,[]],[1,5,[2,3]],[3,3,[]],[4,2,[]]],13
+    0             1         2           3       4
+    
+output = 3+5+2 = 10
+
+                    13
+                1       4
+            2       3
+        
+1. Go through the employees list.
+
+2. Create a hashmap.
+
+ 13->0
+ 2 -> 1
+ 1 -> 2
+ 3 -> 3
+ 4 -> 4
+
+3. Get the value of given input from the hashmap. i.e 13 which gives us [3,[1,4]]
+4. Now, we know the children are 1,4
+5. Then for each children find the value in hashmap and recurse.
+6. We are keeping track of sum at each iteration.
+
+currentEmployee = [13,3,[1,4]],[1,5,[2,3]],[2,3,[]]x,[3,3,[]]x,[4,2,[]]]
+sum = 3+5+3+3+2 = 16
+
+*/
+
+class Solution {
+    
+    int sum = 0;
+    Employee[] employeeHashed = new Employee[2000];
+    
+    public int getImportance(List<Employee> employees, int id) {
+        
+        putInArray(employees);
+        if(employeeHashed[id] != null) traverse(employees, id);
+        return sum;
+    }
+    
+    void putInArray(List<Employee> employees){
+        employees.forEach(
+            employee->employeeHashed[employee.id] = employee
+        );
+    } 
+    
+    void traverse(List<Employee> employees, int id){      
+        sum += employeeHashed[id].importance;
+        employeeHashed[id]
+            .subordinates
+            .forEach(subordinate->{
+                traverse(employees, subordinate);
+            }
+        );   
+    }
+}
