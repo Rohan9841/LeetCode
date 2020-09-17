@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        int index = 0;
+        ListNode current = head;
+        Map<Integer,Integer> aMap = new HashMap<>();
+        while(current != null) {
+            aMap.put(index,current.val);
+            index++;
+            current = current.next; 
+        }
+        int start = 0;
+        int end = aMap.size()-1;
+        while(start < end){
+            if((int)aMap.get(start)==(int)aMap.get(end)){
+                start++;
+                end--;     
+            }else{
+                return false;
+            }
+            
+        }
+        return true;
+    }
+}

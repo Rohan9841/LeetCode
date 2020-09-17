@@ -1,0 +1,23 @@
+class Solution {
+
+  static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
+    // your code goes here
+    
+    int indexA = 0;
+    int indexB = 0;
+   while(indexA<slotsA.length && indexB<slotsB.length){
+      int start = Math.max(slotsA[indexA][0],slotsB[indexB][0]);
+      int end = Math.min(slotsA[indexA][1],slotsB[indexB][1]);
+  
+      if(end - start >= dur) return new int[]{start,start+dur};
+      if(slotsA[indexA][1] > slotsB[indexB][1]) indexB++;
+      else indexA++;
+    }
+    return new int[]{};
+ }
+
+  public static void main(String[] args) {
+
+  }
+
+}
