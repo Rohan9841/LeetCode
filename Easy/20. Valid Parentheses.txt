@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isValid(String s) {
+        Map<Character,Character> aMap = new HashMap<>();
+        aMap.put(')','(');
+        aMap.put('}','{');
+        aMap.put(']','[');
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i<s.length(); i++){
+            if(s.charAt(i) == ')' || s.charAt(i) == '}' || s.charAt(i) == ']'){
+                if(sb.length() == 0) return false;
+                if(aMap.get(s.charAt(i)) == sb.charAt(sb.length()-1)) sb.setLength(sb.length()-1);
+                else return false;
+            }else sb.append(s.charAt(i));
+        }
+        if(sb.length() == 0) return true;
+        return false;
+    }
+}
